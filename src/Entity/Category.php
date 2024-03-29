@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CategoryRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Slug;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 class Category
@@ -21,6 +22,7 @@ class Category
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Slug(fields: ['label'])]
     private ?string $slug = null;
 
     public function getId(): ?int
