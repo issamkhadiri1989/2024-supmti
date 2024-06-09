@@ -1,0 +1,12 @@
+{% extends 'site.html.twig' %}
+{% set blog = blogEditForm.vars.value %}
+{% block title %}{{ blog.title | upper }}{% endblock %}
+{% block content %}
+    {{ form_start(blogEditForm) }}
+    {{ form_row(blogEditForm) }}
+    <button type="submit">Edit blog</button>
+    {{ form_end(blogEditForm) }}
+
+    <p>This blog is {{ blog.published ? 'PUBLISHED' : 'NOT PUBLISHED' }}</p>
+    <p>first published at: {{ blog.publishedAt | date('c') }}</p>
+{% endblock content %}

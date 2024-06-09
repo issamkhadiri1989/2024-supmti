@@ -10,6 +10,7 @@ use Symfony\Component\Form\{AbstractType,
     Extension\Core\Type\TextareaType,
     Extension\Core\Type\TextType,
     FormBuilderInterface};
+use Symfony\Component\Validator\Constraints as Assert;
 
 final class ContactType extends AbstractType
 {
@@ -22,14 +23,27 @@ final class ContactType extends AbstractType
                     'class' => 'form-control',
                 ],
                 'label' => false,
+                'constraints' => [
+                    new Assert\NotNull(),
+                    new Assert\NotBlank(),
+                ],
             ])
             ->add('email', EmailType::class, [
                 'label' => false,
+                'constraints' => [
+                    new Assert\Email(message: 'Please provide a correct email address'),
+                    new Assert\NotNull(),
+                    new Assert\NotBlank(),
+                ],
             ])
             ->add('subject', TextType::class, [
                 'label' => false,
                 'attr' => [
                     'placeholder' => 'Subject',
+                ],
+                'constraints' => [
+                    new Assert\NotNull(message: 'You need to specify the subject'),
+                    new Assert\NotBlank(),
                 ],
             ])
             ->add('message', TextareaType::class, [
@@ -39,6 +53,11 @@ final class ContactType extends AbstractType
                     'cols' => 20,
                     'placeholder' => 'message',
                     'maxlength' => 100,
+                ],
+                'constraints' => [
+                    new Assert\NotNull(),
+                    new Assert\NotBlank(),
+                    new Assert\Length(min: 10, max: 100)
                 ],
             ])
             /*->add('send', SubmitType::class, [

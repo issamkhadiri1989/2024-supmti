@@ -25,7 +25,7 @@ RUN docker-php-ext-install xsl
 
 # Install Symfony cli
 RUN curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash
-RUN apt install symfony-cli
+# RUN apt install symfony-cli
 
 # Install MongoDb
 #RUN pecl install mongodb
